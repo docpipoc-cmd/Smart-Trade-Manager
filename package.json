@@ -1,0 +1,48 @@
+{
+  "name": "smart-trader",
+  "productName": "Smart Trader",
+  "version": "1.0.0",
+  "description": "Smart Trader - trading journal, portfolios and performance analytics",
+  "main": "out/main/main.js",
+  "author": "Smart",
+  "private": true,
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "web": "vite --config vite.web.config.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --experimental-strip-types --no-warnings scripts/test-calc.ts",
+    "icon": "electron scripts/make-icon.cjs",
+    "dist": "electron-vite build && electron-builder --win --x64",
+    "dist:mac": "electron-vite build && electron-builder --mac"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.0",
+    "sql.js": "^1.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/sql.js": "^1.4.9",
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^34.0.0",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^3.0.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7"
+  },
+  "build": {
+    "appId": "com.smart.trader",
+    "productName": "Smart Trader",
+    "artifactName": "Smart-Trader-Setup-${version}.${ext}",
+    "directories": { "output": "release" },
+    "files": ["out/**/*", "build/icon.png", "package.json"],
+    "win": { "icon": "build/icon.ico", "target": [{ "target": "nsis", "arch": ["x64"] }] },
+    "mac": { "icon": "build/icon.png", "category": "public.app-category.finance", "target": [{ "target": "dmg", "arch": ["arm64", "x64"] }] },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true, "createDesktopShortcut": true, "shortcutName": "Smart Trader","installerIcon": "build/icon.ico", "uninstallerIcon": "build/icon.ico" }
+  }
+}
